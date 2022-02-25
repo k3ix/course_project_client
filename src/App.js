@@ -1,25 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import {
+    Home,
+    Login,
+    Registration
+} from "./pages"
+
+import {
+    NavigationMenu,
+    ThemeChanger
+} from "./components";
+import { useEffect } from "react";
+import { authCheck } from "./actions";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const { authState } = useSelector((state) => state.auth)
+    const dispatch = useDispatch();
+    useEffect(() => {
+        console.log(localStorage.getItem("accessToken"))
+        dispatch(authCheck());
+    }, []);
+
+    console.log(authState);
+    return (
+        <div className={`App ${authState.theme}`}>
+            <Router>
+                <div className="navBar-container">
+                    <NavigationMenu />
+                </div>
+                <Routes>
+                    <Route path="/" element={<Home />}/>
+                    <Route path="/login" element={<Login />}/>
+                    <Route path="/registration" element={<Registration />}/>
+                </Routes>
+                <ThemeChanger />
+            </Router>
+        </div>
+    );
 }
 
 export default App;

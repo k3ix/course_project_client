@@ -1,0 +1,32 @@
+.navBar {
+    width: 100vw;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar.light {
+    background-color: #3a68e7;
+    color: white !important;
+}
+
+.navBar.dark {
+    background-color: #333;
+    color: white !important;
+}
+
+.navbtn {
+    color: white !important;
+}
+
+.navBar.light .navbtn:hover {
+    background-color: darkblue !important;
+}
+
+.navBar.dark .navbtn:hover {
+    background-color: #111 !important;
+}
