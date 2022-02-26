@@ -10,7 +10,8 @@ import {
 
 import {
     NavigationMenu,
-    ThemeChanger
+    ThemeChanger,
+    LangChanger
 } from "./components";
 import { useEffect } from "react";
 import { authCheck } from "./actions";
@@ -35,7 +36,10 @@ function App() {
                     <Route path="/login" element={<Login />}/>
                     <Route path="/registration" element={<Registration />}/>
                 </Routes>
-                <ThemeChanger />
+                <div className="footer">
+                    <ThemeChanger />
+                    <LangChanger />
+                </div>
             </Router>
         </div>
     );

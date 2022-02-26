@@ -1,0 +1,9 @@
+{
+  "logout": "Выход",
+  "navMenu": {
+    "mainPage": "Главная",
+    "register": "Регистрация",
+    "login": "Вход"
+  },
+  "darkMode": "Темная тема"
+}

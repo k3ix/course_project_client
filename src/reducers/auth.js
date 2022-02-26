@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authCheck, changeTheme, changeLang, logOut } from "../actions";
+import { authCheck, changeTheme, changeLang, logOut, register, login } from "../actions";
 
 const initialState = {
     authState: {
@@ -28,33 +28,56 @@ export const authReducer = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(authCheck.fulfilled, (state, { payload }) => {
-            //console.log(action)
+            const theme = localStorage.getItem("theme");
             state.authState.id = payload.id;
             state.authState.username = payload.username;
             state.authState.isBlocked = payload.isBlocked;
             state.authState.isAdmin = payload.isAdmin;
-            state.authState.theme = payload.theme;
+            if (theme !== payload.theme) {
+                state.authState.theme = theme;
+            } else {
+                state.authState.theme = payload.theme;
+            }
             state.authState.lang = payload.lang;
             state.authState.status = true
+            localStorage.setItem("i18nextLng", payload.lang);
             return state;
         });
         builder.addCase(authCheck.rejected, (state, action) => {
             localStorage.removeItem("accessToken");
-            state = initialState;
+             if (!localStorage.getItem("theme")) {
+                 localStorage.setItem("theme", "light")
+             }
+            const theme = localStorage.getItem("theme");
+            state.authState.theme = theme;
+            console.log(state.authState);
             return state;
-        })
+        });
+        builder.addCase(register.fulfilled, (state, { payload }) => {
+            console.log("registered")
+        });
+        builder.addCase(register.rejected, (state, { payload }) => {
+            alert(payload);
+        });
+        builder.addCase(login.fulfilled, (state, { payload }) => {
+            localStorage.setItem("accessToken", payload.accessToken);
+            state.authState.status = true;
+        });
         builder.addCase(logOut, (state) => {
+            localStorage.removeItem("accessToken");
             console.log('logout')
             state.authState.status = false;
-        })
+        });
         builder.addCase(changeLang, (state, {payload}) => {
             state.authState.lang = payload;
         });
         builder.addCase(changeTheme.fulfilled, (state, { payload}) => {
             if (payload.isDark) {
-                state.authState.theme = "dark"
+                localStorage.setItem("theme", "dark");
+                state.authState.theme = "dark";
             } else {
-                state.authState.theme = "light"
+                localStorage.setItem("theme", "light");
+                state.authState.theme = "light";
             }
         });
     }

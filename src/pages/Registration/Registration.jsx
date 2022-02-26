@@ -4,11 +4,13 @@ import * as Yup from 'yup';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import "./Registration.css"
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { register } from "../../actions";
 
 export const Registration = () => {
     const { authState } = useSelector((state) => state.auth);
     let history = useNavigate();
+    const dispatch = useDispatch();
 
     const initialValues = {
         email:"",
@@ -17,14 +19,8 @@ export const Registration = () => {
     };
 
     const onSubmit = (data) => {
-        axios.post("https://course-project-itransition.herokuapp.com/users/register", data)
-            .then((response) => {
-            if (response.data.error) {
-                alert(response.data.error);
-            } else {
-                history("/login");
-            }
-        })
+        dispatch(register(data));
+        history("/login");
     };
 
     const validationSchema = Yup.object().shape({

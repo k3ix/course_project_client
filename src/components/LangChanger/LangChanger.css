@@ -1,0 +1,31 @@
+.langChanger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: auto;
+}
+
+.langChanger.dark .menu {
+    color: white;
+}
+
+.langChanger.dark .menu:hover {
+    color: gray;
+}
+
+.langChanger.dark .MuiOutlinedInput-notchedOutline {
+    border-color: white;
+}
+
+.langChanger.dark:hover .MuiOutlinedInput-notchedOutline{
+    border-color: gray;
+}
+
+.langChanger.dark .MuiSvgIcon-root {
+    color: white;
+}
+
+.langChanger.dark:hover .MuiSvgIcon-root {
+    color: gray;
+}

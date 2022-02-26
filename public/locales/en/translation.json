@@ -1,0 +1,9 @@
+{
+  "logout": "Log Out",
+  "navMenu": {
+    "mainPage": "Main Page",
+    "register": "Sign Up",
+    "login": "Log In"
+  },
+  "darkMode": "Dark Mode"
+}

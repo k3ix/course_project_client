@@ -4,11 +4,13 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {login} from "../../actions";
 
 export const Login = () => {
     const { authState } = useSelector((state) => state.auth);
     let history = useNavigate();
+    const dispatch = useDispatch();
 
     const initialValues = {
         nameOrEmail: "",
@@ -21,15 +23,8 @@ export const Login = () => {
     });
 
     const onSubmit = (data) => {
-        axios.post("https://course-project-itransition.herokuapp.com/users/login", data).then((response) => {
-            if (response.data.error) {
-                alert(response.data.error)
-            } else {
-                localStorage.setItem("accessToken", response.data.accessToken);
-                history("/");
-                history(0);
-            }
-        });
+        dispatch(login(data));
+        history("/");
     };
 
     return (
