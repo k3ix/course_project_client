@@ -1,0 +1,40 @@
+.userInfo {
+    margin: 8px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.userInfo.dark svg, .userInfo.dark .username {
+    color: white;
+}
+
+.buttonBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userbtn {
+    margin: 0 5px !important;
+    color: white !important;
+}
+
+.buttonBar.light .userbtn {
+    background-color: #3a68e7 !important;
+
+}
+
+.buttonBar.light .userbtn:hover {
+    background-color: darkblue !important;
+}
+
+.buttonBar.dark .userbtn {
+    background-color: #565252 !important;
+}
+
+.buttonBar.dark .userbtn:hover {
+    background-color: #111 !important;
+}

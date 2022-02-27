@@ -1,13 +1,14 @@
 import React from 'react';
 import {Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './Login.css';
 import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../actions";
+import {useTranslation} from "react-i18next";
 
 export const Login = () => {
+    const { t } = useTranslation();
     const { authState } = useSelector((state) => state.auth);
     let history = useNavigate();
     const dispatch = useDispatch();
@@ -18,8 +19,8 @@ export const Login = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        nameOrEmail: Yup.string().required("Username or E-Mail are required."),
-        password: Yup.string().required("Password is required."),
+        nameOrEmail: Yup.string().required(t("loginPage.noeReq")),
+        password: Yup.string().required(t("loginPage.passReq")),
     });
 
     const onSubmit = (data) => {
@@ -39,15 +40,15 @@ export const Login = () => {
                         autoComplete="off"
                         id="loginFormField"
                         name="nameOrEmail"
-                        placeholder="Enter username or e-mail" />
+                        placeholder={t("loginPage.noePlaceholder")} />
                     <ErrorMessage name="password" component="span"/>
                     <Field
                         autoComplete="off"
                         type="password"
                         id="loginFormField"
                         name="password"
-                        placeholder="Password"/>
-                    <button type="submit" className="submit-btn">Log In</button>
+                        placeholder={t("loginPage.passPlaceholder")} />
+                    <button type="submit" className="submit-btn">{t("loginPage.login")}</button>
                 </Form>
             </Formik>
         </div>

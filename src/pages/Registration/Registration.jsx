@@ -1,13 +1,14 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
-import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 import "./Registration.css"
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions";
+import {useTranslation} from "react-i18next";
 
 export const Registration = () => {
+    const { t } = useTranslation();
     const { authState } = useSelector((state) => state.auth);
     let history = useNavigate();
     const dispatch = useDispatch();
@@ -24,9 +25,9 @@ export const Registration = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        email: Yup.string().email("Wrong input").required("E-Mail is required."),
-        username: Yup.string().required("Username is required."),
-        password: Yup.string().required("Password is required."),
+        email: Yup.string().email("Wrong input").required(t('regPage.emailReq')),
+        username: Yup.string().required(t('regPage.usernameReq')),
+        password: Yup.string().required(t('regPage.passReq')),
     });
     return (
         <div className="registerPage">
@@ -40,21 +41,21 @@ export const Registration = () => {
                         autoComplete="off"
                         id="registerFormField"
                         name="email"
-                        placeholder="Enter your e-mail" />
+                        placeholder={t('regPage.emailPlaceholder')} />
                     <ErrorMessage name="username" component="span"/>
                     <Field
                         autoComplete="off"
                         id="registerFormField"
                         name="username"
-                        placeholder="Enter username" />
+                        placeholder={t('regPage.usernamePlaceholder')} />
                     <ErrorMessage name="password" component="span"/>
                     <Field
                         autoComplete="off"
                         type="password"
                         id="registerFormField"
                         name="password"
-                        placeholder="Password"/>
-                    <button type="submit" className="submit-btn">Register</button>
+                        placeholder={t('regPage.passPlaceholder')} />
+                    <button type="submit" className="submit-btn">{t('regPage.reg')}</button>
                 </Form>
             </Formik>
         </div>

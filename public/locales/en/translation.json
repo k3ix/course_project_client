@@ -5,5 +5,44 @@
     "register": "Sign Up",
     "login": "Log In"
   },
-  "darkMode": "Dark Mode"
+  "darkMode": "Dark Mode",
+  "loginPage": {
+    "noeReq": "Username or E-Mail are required.",
+    "passReq": "Password is required.",
+    "noePlaceholder": "Enter username or e-mail",
+    "passPlaceholder": "Enter password",
+    "login": "Log In"
+  },
+  "regPage": {
+    "emailReq": "E-Mail is required.",
+    "usernameReq": "Username is required.",
+    "passReq": "Password is required.",
+    "emailPlaceholder": "Enter e-mail",
+    "usernamePlaceholder": "Enter username",
+    "passPlaceholder": "Enter password",
+    "reg": "Sign Up"
+  },
+  "wrongPath": {
+    "title": "Wrong path :(",
+    "subtitle": "Try this"
+  },
+  "user": {
+    "adminPanel": "Admin panel",
+    "createOverview": "Create overview"
+  },
+  "adminPanel": {
+    "block": "Block",
+    "unblock": "Unblock",
+    "setAdmin": "Set admin",
+    "delete": "Delete",
+    "id": "ID",
+    "username": "Username",
+    "email": "E-mail",
+    "blockStatus": "Blocked",
+    "admin": "Admin",
+    "yes": "Yes",
+    "no": "No",
+    "regDate": "Reg. date",
+    "profile": "Profile"
+  }
 }

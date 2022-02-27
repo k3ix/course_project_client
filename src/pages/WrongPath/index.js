@@ -1,0 +1,1 @@
+export { WrongPath } from "./WrongPath";

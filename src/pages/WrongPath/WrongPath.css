@@ -1,0 +1,15 @@
+.wrongPage a {
+    color: black;
+}
+
+.wrongPage a:hover {
+    color: #3a68e7;
+}
+
+.wrongPage.dark,  .wrongPage.dark a{
+    color: white;
+}
+
+.wrongPage.dark a:hover {
+    color: gray;
+}

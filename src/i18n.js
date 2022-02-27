@@ -6,26 +6,20 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
     .use(Backend)
-
-
     .use(LanguageDetector)
-
     .use(initReactI18next)
-
-
     .init({
-        whiteliist: ["en", "ru"],
+        supportedLngs: ["en", "ru"],
         fallbackLng: 'en',
         debug: true,
         detection: {
             order: ["localStorage"],
             caches: ["localStorage"]
         },
-
         interpolation: {
             escapeValue: false,
-        }
-    });
+        },
+    }).catch(console.error);
 
 
 export default i18n;

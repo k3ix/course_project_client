@@ -5,7 +5,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {
     Home,
     Login,
-    Registration
+    Registration,
+    WrongPath,
+    User,
+    AdminPanel,
+    CreateOverview
 } from "./pages"
 
 import {
@@ -35,6 +39,10 @@ function App() {
                     <Route path="/" element={<Home />}/>
                     <Route path="/login" element={<Login />}/>
                     <Route path="/registration" element={<Registration />}/>
+                    <Route path="/admin-panel" element={<AdminPanel />} />
+                    <Route path="/user/:userId" element={<User />} />
+                    <Route path="/user/:userId/create-overview" element={<CreateOverview />}/>
+                    <Route path="*" element={<WrongPath />} />
                 </Routes>
                 <div className="footer">
                     <ThemeChanger />

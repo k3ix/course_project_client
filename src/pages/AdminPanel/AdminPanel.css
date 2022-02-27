@@ -1,0 +1,46 @@
+.adminTable {
+    margin: 5px;
+    height: 74vh;
+    width: 100vw;
+    max-width: 972px;
+    background-color: white;
+}
+
+.adminTable.dark {
+    background-color: #111111;
+    color: white;
+}
+
+.adminTable.dark * {
+    color: white;
+}
+
+.MuiDataGrid-cell--textLeft svg {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.MuiDataGrid-cell--textLeft svg:hover {
+    cursor: pointer;
+    background-color: darkgray;
+}
+
+.admBar {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.admBar svg {
+    color: black;
+}
+
+.admBar.dark svg {
+    color:white;
+}
+
+.admBar button:hover {
+    background-color: darkgray;
+}

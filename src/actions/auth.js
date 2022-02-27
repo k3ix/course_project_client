@@ -1,4 +1,4 @@
-import {createAction, createAsyncThunk, isRejected} from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 

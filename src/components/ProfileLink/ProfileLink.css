@@ -1,0 +1,7 @@
+.profile-icon.light:hover {
+    background-color: darkblue;
+}
+
+.profile-icon.dark:hover {
+    background-color: #111111;
+}

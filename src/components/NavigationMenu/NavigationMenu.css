@@ -15,7 +15,7 @@
 }
 
 .navBar.dark {
-    background-color: #333;
+    background-color: #565252;
     color: white !important;
 }
 
@@ -23,10 +23,42 @@
     color: white !important;
 }
 
-.navBar.light .navbtn:hover {
+.navMenuList.light .navbtn {
+    background-color: #3a68e7;
+}
+
+.navMenuList.light .navbtn:hover {
     background-color: darkblue !important;
 }
 
-.navBar.dark .navbtn:hover {
+.navMenuList.dark .navbtn {
+    background-color: #565252;
+    border: none;
+}
+
+.navMenuList.dark .navbtn:hover {
     background-color: #111 !important;
 }
+
+.prof-logo {
+    position: absolute !important;
+    right: 0 !important;
+    display: flex;
+    flex-direction: row;
+}
+
+.navMenuList{
+    display: flex;
+    flex-direction: column;
+    background-color: #3a68e7;
+    z-index: 1;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+}
+
+.navMenuList.dark {
+    background-color: #565252;
+}
+
+
