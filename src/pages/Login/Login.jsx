@@ -23,9 +23,10 @@ export const Login = () => {
         password: Yup.string().required(t("loginPage.passReq")),
     });
 
-    const onSubmit = (data) => {
-        dispatch(login(data));
+    const onSubmit = async (data) => {
+        await dispatch(login(data));
         history("/");
+        //history(0);
     };
 
     return (

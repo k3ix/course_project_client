@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {userById} from "../../api";
+import { userById } from "../../api";
 import {Button, Container} from "@mui/material";
 import {AccountBox} from "@mui/icons-material";
 import './User.css'

@@ -3,3 +3,4 @@ export { LogOut } from './LogOut';
 export { ThemeChanger } from "./ThemeChanger";
 export { LangChanger } from './LangChanger';
 export { ProfileLink } from './ProfileLink';
+export { ImageDropzone } from './ImageDropzone';

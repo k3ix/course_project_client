@@ -11,7 +11,7 @@ i18n
     .init({
         supportedLngs: ["en", "ru"],
         fallbackLng: 'en',
-        debug: true,
+        debug: false,
         detection: {
             order: ["localStorage"],
             caches: ["localStorage"]

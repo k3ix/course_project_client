@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useTranslation } from "react-i18next";
+import {authCheck} from "../../actions";
+import {useDispatch} from "react-redux";
 
 export const Home = () => {
-    const { t, i18n } = useTranslation();
-    const changeLang = (lang) => {
-        i18n.changeLanguage(lang);
-    }
+    const dispatch = useDispatch();
+    const { t } = useTranslation();
+
+    useEffect(() => {
+        dispatch(authCheck());
+    }, []);
 
     return (
         <div>

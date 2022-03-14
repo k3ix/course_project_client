@@ -18,7 +18,6 @@ export const COLUMNS = [
         renderHeader: () => i18n.t("adminPanel.email"),
         sortable: false,
         width: 230,
-        resizable: true
     },
     {
         field: 'isBlocked',

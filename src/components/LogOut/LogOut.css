@@ -1,4 +1,16 @@
-/*.logoutbtn {*/
-/*    position: absolute !important;*/
-/*    right: 0 !important;*/
-/*}*/
+.logoutbtn.light {
+    background-color: #3a68e7;
+}
+
+ .logoutbtn.light:hover {
+    background-color: darkblue !important;
+}
+
+ .logoutbtn.dark {
+    background-color: #565252;
+    border: none;
+}
+
+ .logoutbtn.dark:hover {
+    background-color: #111 !important;
+}

@@ -24,11 +24,9 @@ function App() {
     const { authState } = useSelector((state) => state.auth)
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log(localStorage.getItem("accessToken"))
         dispatch(authCheck());
     }, []);
 
-    console.log(authState);
     return (
         <div className={`App ${authState.theme}`}>
             <Router>

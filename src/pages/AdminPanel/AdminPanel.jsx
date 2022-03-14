@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { userList } from "../../api";
+import { userList, blockUsersApi, unblockUsersApi, setAdminApi, deleteUsersApi } from "../../api";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
@@ -22,45 +22,110 @@ export const AdminPanel = () => {
         });
     }, []);
 
-    return (
-        <div className="adminPanel">
-            <div className={`admBar ${authState.theme}`}>
-                <IconButton title={t('adminPanel.block')}>
-                    <Lock/>
-                </IconButton>
-                <IconButton title={t('adminPanel.unblock')}>
-                    <LockOpen />
-                </IconButton>
-                <IconButton title={t('adminPanel.setAdmin')}>
-                    <LocalPolice />
-                </IconButton>
-                <IconButton title={t('adminPanel.delete')}>
-                    <DeleteForever />
-                </IconButton>
-            </div>
-            <div className={`adminTable ${authState.theme}`}>
-                <DataGrid
-                columns={[...COLUMNS,
-                    {
-                        field: 'additional',
-                        renderHeader: () => t('adminPanel.profile'),
-                        sortable: false,
-                        width: 100,
-                        renderCell: (params) => {
-                            return (<Person onClick={() => {
-                                history(`/user/${params.getValue(params.id, 'id')}`)
-                            }}/>)
-                        }
+    const blockUsers = async () => {
+        const blockIds = listOfIds;
+        blockUsersApi(blockIds).then(() => {
+            blockIds.map((value) => {
+                setListOfUsers(prevState => prevState.map((user) => {
+                    if(value === user.id){
+                        return {...user, isBlocked: true };
+                    } else {
+                        return user;
                     }
-                    ]}
-                rows={listOfUsers}
-                pageSize={10}
-                checkboxSelection
-                disableSelectionOnClick
-                disableColumnMenu
-                onSelectionModelChange={itm => setListOfIds(itm)}
-                />
+                }));
+                return value;
+            });
+        });
+    };
+
+    const unblockUsers = async () => {
+        const unblockIds = listOfIds;
+        unblockUsersApi(unblockIds).then(() => {
+            unblockIds.map((value) => {
+                setListOfUsers(prevState => prevState.map((user) => {
+                    if(value === user.id){
+                        return {...user, isBlocked: false };
+                    } else {
+                        return user;
+                    }
+                }));
+                return value;
+            });
+        });
+    };
+
+    const setAdmin = async () => {
+        const adminIds = listOfIds;
+        setAdminApi(adminIds).then(() => {
+            adminIds.map((value) => {
+                setListOfUsers(prevState => prevState.map((user) => {
+                    if(value === user.id){
+                        return {...user, isAdmin: true };
+                    } else {
+                        return user;
+                    }
+                }));
+                return value;
+            });
+        });
+    };
+
+    const deleteUsers = async () => {
+        const deleteIds = listOfIds;
+        deleteUsersApi(deleteIds).then(() => {
+            deleteIds.map((value) => {
+                setListOfUsers(prevState => prevState.filter((user) => {
+                    return user.id !== value;
+                }));
+                return value;
+            });
+        });
+    }
+
+    return (
+        (!authState.isAdmin &&
+            <h1>{t('adminPanel.notAdmin')}</h1>
+        ) ||
+        (authState.isAdmin &&
+            <div className="adminPanel">
+                <div className={`admBar ${authState.theme}`}>
+                    <IconButton onClick={blockUsers} title={t('adminPanel.block')}>
+                        <Lock/>
+                    </IconButton>
+                    <IconButton onClick={unblockUsers} title={t('adminPanel.unblock')}>
+                        <LockOpen />
+                    </IconButton>
+                    <IconButton onClick={setAdmin} title={t('adminPanel.setAdmin')}>
+                        <LocalPolice />
+                    </IconButton>
+                    <IconButton onClick={deleteUsers} title={t('adminPanel.delete')}>
+                        <DeleteForever />
+                    </IconButton>
+                </div>
+                <div className={`adminTable ${authState.theme}`}>
+                    <DataGrid
+                        columns={[...COLUMNS,
+                            {
+                                field: 'additional',
+                                renderHeader: () => t('adminPanel.profile'),
+                                sortable: false,
+                                width: 100,
+                                renderCell: (params) => {
+                                    return (<Person onClick={() => {
+                                        history(`/user/${params.getValue(params.id, 'id')}`)
+                                    }}/>)
+                                }
+                            }
+                        ]}
+                        rows={listOfUsers}
+                        pageSize={10}
+                        checkboxSelection
+                        disableSelectionOnClick
+                        disableColumnMenu
+                        onSelectionModelChange={itm => setListOfIds(itm)}
+                    />
+                </div>
             </div>
-        </div>
+        )
     );
 };

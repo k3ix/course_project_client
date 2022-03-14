@@ -43,6 +43,7 @@
     "yes": "Yes",
     "no": "No",
     "regDate": "Reg. date",
-    "profile": "Profile"
+    "profile": "Profile",
+    "notAdmin": "Sorry, this page is only for admins :("
   }
 }
