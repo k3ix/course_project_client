@@ -3,7 +3,7 @@ import { userList, blockUsersApi, unblockUsersApi, setAdminApi, deleteUsersApi }
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
-import { COLUMNS } from "../../shared";
+import { ADMIN_COLUMNS } from "../../shared";
 import { Person } from "@mui/icons-material";
 import './AdminPanel.css';
 import { IconButton } from "@mui/material";
@@ -21,6 +21,8 @@ export const AdminPanel = () => {
             setListOfUsers(list);
         });
     }, []);
+
+    console.log(listOfUsers)
 
     const blockUsers = async () => {
         const blockIds = listOfIds;
@@ -104,7 +106,7 @@ export const AdminPanel = () => {
                 </div>
                 <div className={`adminTable ${authState.theme}`}>
                     <DataGrid
-                        columns={[...COLUMNS,
+                        columns={[...ADMIN_COLUMNS,
                             {
                                 field: 'additional',
                                 renderHeader: () => t('adminPanel.profile'),
@@ -117,6 +119,7 @@ export const AdminPanel = () => {
                                 }
                             }
                         ]}
+                        autoHeight={listOfUsers}
                         rows={listOfUsers}
                         pageSize={10}
                         checkboxSelection

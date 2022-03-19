@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
+import axios from "axios";
 import { useNavigate, useParams} from "react-router-dom";
 import * as Yup from 'yup';
 import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import CreatableSelect from 'react-select/creatable';
-import {addTags, cloudinaryUpload, createOverview, getTags, userById} from "../../api";
+import { addTags, createOverview, getTags, userById } from "../../api";
 import { useSelector } from "react-redux";
-
 import { ImageDropzone } from "../../components";
 
 import "react-mde/lib/styles/css/react-mde-all.css";
-import axios from "axios";
+import "./CreateOverview.css";
+import {useTranslation} from "react-i18next";
+
 
 
 
@@ -23,11 +25,12 @@ const converter = new Showdown.Converter({
 });
 
 export const CreateOverview = () => {
+    const { t } = useTranslation();
     const { userId } = useParams();
     const { authState } = useSelector((state) => state.auth);
     const [listOfTags, setListOfTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
-    const [freeText, setFreeText] = useState("Write your message");
+    const [freeText, setFreeText] = useState();
     const [selectedTab, setSelectedTab] = useState("write");
     const [thisUser, setThisUser] = useState({});
     const [imagesToUpload, setImagesToUpload] = useState({});
@@ -87,6 +90,7 @@ export const CreateOverview = () => {
             data.description = freeText;
             createOverview(data).then((res) => {
                 history(`/user/${userId}`);
+                history(0);
             });
         })).catch((e) => alert(e));
     }
@@ -97,24 +101,25 @@ export const CreateOverview = () => {
 
 
     return (
-        <div className="createOverview">
+        <div className="create-overview">
             <Formik initialValues={initialValues}
                     onSubmit={onSubmit}
                     validationSchema={validationSchema}>
-                <Form>
+                <Form className={`overview-form ${authState.theme}`}>
                     <Field
                         autoComplete="off"
-                        id="writeMessageFormField"
+                        id="titleField"
+                        className="overview-form-field title"
                         name="title"
-                        placeholder="Enter a title" />
-                    <Field as="select" id="inputCreateOverview" name="group">
-                        <option value="" hidden >Choose a theme</option>
-                        <option value="books" >Books</option>
-                        <option value="movies" >Movies</option>
-                        <option value="games" >Videogames</option>
+                        placeholder={t("createOverview.titlePlaceholder")} />
+                    <Field as="select" className="overview-form-field group" id="groupCreateOverview" name="group">
+                        <option value="" hidden >{t('createOverview.group.placeholder')}</option>
+                        <option value="books" >{t('createOverview.group.books')}</option>
+                        <option value="movies" >{t('createOverview.group.movies')}</option>
+                        <option value="games" >{t('createOverview.group.games')}</option>
                     </Field>
-                    <Field as="select" id="inputCreateOverview" name="authorRating">
-                        <option value="" hidden >Enter rating</option>
+                    <Field as="select" className="overview-form-field rating" id="ratingCreateOverview" name="authorRating">
+                        <option value="" hidden >{t('createOverview.rating')}</option>
                         <option value="0" >0</option>
                         <option value="1" >1</option>
                         <option value="2" >2</option>
@@ -123,6 +128,7 @@ export const CreateOverview = () => {
                         <option value="5" >5</option>
                     </Field>
                     <CreatableSelect
+                        className="overview-form-field tags"
                         isMulti
                         id="inputCreateItemTags"
                         onChange={onTagsChange}
@@ -130,9 +136,10 @@ export const CreateOverview = () => {
                             return e.replace(" ", '');
                         }}
                         options={listOfTags}
-                        placeholder="Enter tags" />
+                        placeholder={t('createOverview.tags')} />
                     <ImageDropzone imagesToUpload={imagesToUpload} setImagesToUpload={setImagesToUpload} />
                     <ReactMde
+                        className="overview-form-field description"
                         value={freeText}
                         onChange={setFreeText}
                         selectedTab={selectedTab}
@@ -146,7 +153,7 @@ export const CreateOverview = () => {
                             }
                         }}
                     />
-                    <button type="submit" className="submitbtn">Send message</button>
+                    <button type="submit" className="submit-btn">{t('createOverview.button')}</button>
                 </Form>
             </Formik>
         </div>

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-
-import "./ImageDropzone.css"
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
+import "./ImageDropzone.css"
+import {useSelector} from "react-redux";
+import {useTranslation} from "react-i18next";
+
 export const ImageDropzone = ({imagesToUpload, setImagesToUpload}) => {
+    const { t } = useTranslation();
     const [files, setFiles] = useState([]);
+    const { authState } = useSelector((state) => state.auth);
     const { getRootProps, getInputProps } = useDropzone({
         maxFiles: 3,
         accept: "image/*",
@@ -38,19 +42,21 @@ export const ImageDropzone = ({imagesToUpload, setImagesToUpload}) => {
     }
 
     return (
-        <div>
-            <div {...getRootProps({ className: "dropzone" })}>
+        <div className="image-dropzone">
+            <div {...getRootProps({ className: `dropzone ${authState.theme}` })}>
                 <input {...getInputProps()} />
-                <p>DRAG 'n' drop files or click</p>
+                <p>{t('imageDropzone')}</p>
             </div>
-            {files.map((file, key) => {
-                return (<div key={key}>
-                    <img alt="" src={file} key={key} />
-                    <IconButton onClick={() => {deleteImage(file)}}>
-                        <Delete />
-                    </IconButton>
-                </div>)
-            })}
+            <div className="uploaded-images-container">
+                {files.map((file, key) => {
+                    return (<div key={key} className={`uploaded-images ${authState.theme}`}>
+                                <img alt="" src={file} key={key} />
+                                <IconButton onClick={() => {deleteImage(file)}}>
+                                    <Delete />
+                                </IconButton>
+                            </div>)
+                })}
+            </div>
         </div>
     );
 };

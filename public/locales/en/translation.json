@@ -28,7 +28,22 @@
   },
   "user": {
     "adminPanel": "Admin panel",
-    "createOverview": "Create overview"
+    "createOverview": "Create overview",
+    "headers": {
+      "id": "ID",
+      "title": "Title",
+      "group": "Group",
+      "created": "Created",
+      "updated": "Last updated",
+      "ops": "Options"
+    },
+    "groups": {
+      "books": "Books",
+      "movies": "Movies",
+      "games": "Videogames"
+    },
+    "see": "See more",
+    "edit": "Edit"
   },
   "adminPanel": {
     "block": "Block",
@@ -45,5 +60,18 @@
     "regDate": "Reg. date",
     "profile": "Profile",
     "notAdmin": "Sorry, this page is only for admins :("
+  },
+  "imageDropzone": "Drag 'n' drop image or click to upload",
+  "createOverview": {
+    "titlePlaceholder": "Enter a title",
+    "group": {
+      "placeholder": "Choose a group",
+      "books": "Books",
+      "movies": "Movies",
+      "games": "Videogames"
+    },
+    "rating": "Choose rating",
+    "tags": "Enter tags",
+    "button": "Create overview"
   }
 }

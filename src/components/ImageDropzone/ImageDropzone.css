@@ -1,0 +1,70 @@
+.image-dropzone {
+
+    width: 30vw;
+    max-width: 400px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.dropzone {
+    border: 3px solid #3a68e7;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.dropzone:hover {
+    cursor: pointer;
+    border: 3px red dashed;
+}
+
+.dropzone.dark {
+    border: 3px solid white;
+}
+
+.dropzone.dark p {
+    color: white;
+}
+
+.dropzone.dark:hover {
+    cursor: pointer;
+    border: 3px white dashed;
+}
+
+.uploaded-images-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.uploaded-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.uploaded-images img {
+    width: 200px;
+    height: 200px;
+}
+
+.uploaded-images button {
+    padding: 0;
+}
+
+.uploaded-images svg {
+    color: black;
+    margin: 5px 0 0 5px;
+    padding: 4px;
+    border-radius: 20px;
+}
+
+.uploaded-images svg:hover {
+    background-color: darkgray;
+}
+
+.uploaded-images.dark svg {
+    color: white;
+}

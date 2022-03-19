@@ -1,1 +1,1 @@
-export { COLUMNS } from './columns'
+export { ADMIN_COLUMNS, OVERVIEWS_COLUMNS } from './columns'

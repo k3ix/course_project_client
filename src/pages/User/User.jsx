@@ -1,20 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { userById } from "../../api";
-import {Button, Container} from "@mui/material";
-import {AccountBox} from "@mui/icons-material";
+import { userById, userOverviews } from "../../api";
+import {Button, Container, IconButton} from "@mui/material";
+import {AccountBox, DeleteForever, Person} from "@mui/icons-material";
 import './User.css'
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { OVERVIEWS_COLUMNS } from "../../shared";
+import { DataGrid } from "@mui/x-data-grid";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import EditIcon from '@mui/icons-material/Edit';
 
 export const User = () => {
     const { t } = useTranslation();
     let history = useNavigate();
     const { authState } = useSelector((state) => state.auth);
     let { userId } = useParams();
+    const [listOfIds, setListOfIds] = useState([]);
     const [thisUser, setThisUser] = useState({});
+    const [usersOverviews, setUsersOverviews] = useState([]);
 
-    useEffect(() => {
+    useEffect(async () => {
         userById(userId).then(user => {
             if (user) {
                 setThisUser(user);
@@ -22,9 +28,21 @@ export const User = () => {
                 history('/');
             }
         });
-    }, [authState, userId])
+
+        userOverviews(userId).then(data => {
+            if (data) {
+                setUsersOverviews(data);
+            }
+        });
+    }, [authState, userId]);
+
+    const deleteOverviews = () => {
+        const deleteIds = listOfIds;
+
+    }
+
     return (
-        <Container className="userPage" fixed>
+        <div className="userPage">
             <div className={`userInfo ${authState.theme}`}>
                 <AccountBox fontSize="large" color="primary" />
                 <h3 className="username">{thisUser.username}</h3>
@@ -43,6 +61,44 @@ export const User = () => {
                     >{t('user.createOverview')}</Button>
                 }
             </div>
-        </Container>
+            <div className="table-container">
+                <div className={`table-bar ${authState.theme}`}>
+                    <IconButton onClick={deleteOverviews} title={t('adminPanel.delete')}>
+                        <DeleteForever />
+                    </IconButton>
+                </div>
+                <div className={`overviews-table ${authState.theme}`}>
+                    <DataGrid
+                        autoHeight={usersOverviews}
+                        columns={[...OVERVIEWS_COLUMNS, {
+                            field: "additional",
+                            renderHeader: () => t('user.headers.ops'),
+                            sortable: false,
+                            width: 150,
+                            renderCell: (params) => {
+                                return (<div>
+                                            <IconButton
+                                                onClick={() => {history(`/user/${params.getValue(params.id, 'id')}`)}}
+                                                title={t('user.see')}>
+                                                <RemoveRedEyeIcon/>
+                                            </IconButton>
+                                            <IconButton
+                                                onClick={() => {history(`/user/${params.getValue(params.id, 'id')}`)}}
+                                                title={t('user.edit')}>
+                                                <EditIcon/>
+                                            </IconButton>
+                                        </div>)
+                            }
+                        }]}
+                        rows={usersOverviews}
+                        pageSize={10}
+                        checkboxSelection
+                        disableSelectionOnClick
+                        disableColumnMenu
+                        onSelectionModelChange={itm => setListOfIds(itm)}
+                    />
+                </div>
+            </div>
+        </div>
     );
 };

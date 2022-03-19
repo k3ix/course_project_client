@@ -1,3 +1,8 @@
+.userPage {
+    display: flex;
+    flex-direction: column;
+}
+
 .userInfo {
     margin: 8px 0px;
     width: 100%;
@@ -37,4 +42,58 @@
 
 .buttonBar.dark .userbtn:hover {
     background-color: #111 !important;
+}
+
+.table-container {
+    width: 100vw;
+    max-width: 972px;
+}
+
+.table-container {
+    margin: 10px;
+}
+
+.table-bar {
+    display: flex;
+    justify-content: center;
+}
+
+.table-bar svg {
+    color: black;
+}
+
+.table-bar.dark svg {
+    color: white;
+}
+
+.table-bar button:hover {
+    background-color: darkgray;
+}
+
+.overviews-table {
+    width: 100vw;
+    max-width: 972px;
+    background-color: white;
+}
+
+.overviews-table.dark {
+    background-color: #111111;
+    color: white;
+}
+
+.overviews-table.dark * {
+    color: white;
+}
+
+.overviews-table svg {
+    color: black;
+    border-radius: 20px;
+}
+
+.overviews-table.dark svg {
+    color: white;
+}
+
+.overviews-table button:hover {
+    background: none;
 }
