@@ -1,0 +1,16 @@
+.overview-page.dark {
+    color: white;
+}
+
+.overview-page .icon {
+    color: #3a68e7;
+}
+
+.overview-page.dark .icon {
+    color: white;
+}
+
+.overview-page.dark .icon:hover {
+    background-color: #565252;
+}
+

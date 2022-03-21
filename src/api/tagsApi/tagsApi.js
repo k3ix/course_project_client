@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const addTags = async (tags) => {
+export const addTagsApi = async (tags) => {
     axios.post("https://course-project-itransition.herokuapp.com/tags/addTags", tags).then((response) => {
         return response.data;
     });
 };
 
-export const getTags = async () => {
+export const getTagsApi = async () => {
     const response = await axios.get("https://course-project-itransition.herokuapp.com/tags");
     return response.data;
 }

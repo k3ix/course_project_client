@@ -28,7 +28,6 @@ export const register = createAsyncThunk('auth/register',
     });
 export const login = createAsyncThunk('auth/login',
     async (req, { rejectWithValue }) => {
-    console.log(req);
     const response = await axios.post("https://course-project-itransition.herokuapp.com/users/login", req);
     if (response.data.error) {
         return rejectWithValue(response.data.error);

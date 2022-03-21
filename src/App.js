@@ -9,7 +9,9 @@ import {
     WrongPath,
     User,
     AdminPanel,
-    CreateOverview
+    CreateOverview,
+    Overview,
+    EditOverview
 } from "./pages"
 
 import {
@@ -40,6 +42,8 @@ function App() {
                     <Route path="/admin-panel" element={<AdminPanel />} />
                     <Route path="/user/:userId" element={<User />} />
                     <Route path="/user/:userId/create-overview" element={<CreateOverview />}/>
+                    <Route path="/overview/:overviewId" element={<Overview />}/>
+                    <Route path="/overview/:overviewId/edit" element={<EditOverview />}/>
                     <Route path="*" element={<WrongPath />} />
                 </Routes>
                 <div className="footer">

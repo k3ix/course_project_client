@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { userById, userOverviews } from "../../api";
-import {Button, Container, IconButton} from "@mui/material";
-import {AccountBox, DeleteForever, Person} from "@mui/icons-material";
+import {deleteOverviewsApi, userById, userOverviewsApi} from "../../api";
+import {Button, IconButton} from "@mui/material";
+import { AccountBox, DeleteForever } from "@mui/icons-material";
 import './User.css'
 import { useTranslation } from "react-i18next";
 import { OVERVIEWS_COLUMNS } from "../../shared";
@@ -29,17 +29,25 @@ export const User = () => {
             }
         });
 
-        userOverviews(userId).then(data => {
+        userOverviewsApi(userId).then(data => {
             if (data) {
                 setUsersOverviews(data);
             }
         });
     }, [authState, userId]);
 
-    const deleteOverviews = () => {
+    const deleteOverviews = async () => {
         const deleteIds = listOfIds;
-
-    }
+        console.log(deleteIds);
+        deleteOverviewsApi(deleteIds).then(() => {
+            deleteIds.map((value) => {
+                setUsersOverviews(prev => prev.filter((overview) => {
+                    return overview.id !== value;
+                }));
+                return value;
+            });
+        });
+    };
 
     return (
         <div className="userPage">
@@ -69,7 +77,7 @@ export const User = () => {
                 </div>
                 <div className={`overviews-table ${authState.theme}`}>
                     <DataGrid
-                        autoHeight={usersOverviews}
+                        autoHeight
                         columns={[...OVERVIEWS_COLUMNS, {
                             field: "additional",
                             renderHeader: () => t('user.headers.ops'),
@@ -78,12 +86,14 @@ export const User = () => {
                             renderCell: (params) => {
                                 return (<div>
                                             <IconButton
-                                                onClick={() => {history(`/user/${params.getValue(params.id, 'id')}`)}}
+                                                onClick={() => {history(`/overview/${params
+                                                    .getValue(params.id, 'id')}`)}}
                                                 title={t('user.see')}>
                                                 <RemoveRedEyeIcon/>
                                             </IconButton>
                                             <IconButton
-                                                onClick={() => {history(`/user/${params.getValue(params.id, 'id')}`)}}
+                                                onClick={() => {history(`/overview/${params
+                                                    .getValue(params.id, 'id')}/edit`)}}
                                                 title={t('user.edit')}>
                                                 <EditIcon/>
                                             </IconButton>

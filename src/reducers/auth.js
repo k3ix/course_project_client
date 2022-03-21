@@ -50,7 +50,6 @@ export const authReducer = createSlice({
              }
             const theme = localStorage.getItem("theme");
             state.authState.theme = theme;
-            console.log(state.authState);
             return state;
         });
         builder.addCase(register.fulfilled, (state, { payload }) => {
@@ -65,7 +64,6 @@ export const authReducer = createSlice({
         });
         builder.addCase(logOut, (state) => {
             localStorage.removeItem("accessToken");
-            console.log('logout')
             state.authState.status = false;
         });
         builder.addCase(changeLang, (state, {payload}) => {

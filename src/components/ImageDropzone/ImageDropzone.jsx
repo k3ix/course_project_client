@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDropzone } from 'react-dropzone';
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
@@ -7,7 +7,7 @@ import "./ImageDropzone.css"
 import {useSelector} from "react-redux";
 import {useTranslation} from "react-i18next";
 
-export const ImageDropzone = ({imagesToUpload, setImagesToUpload}) => {
+export const ImageDropzone = ({ imagesToUpload, setImagesToUpload, currImages, setCurrImages }) => {
     const { t } = useTranslation();
     const [files, setFiles] = useState([]);
     const { authState } = useSelector((state) => state.auth);
@@ -16,7 +16,7 @@ export const ImageDropzone = ({imagesToUpload, setImagesToUpload}) => {
         accept: "image/*",
         minSize: 0,
         maxSize: 1048576,
-        onDrop: (acceptedFiles, rejFiles) => {
+        onDrop: (acceptedFiles) => {
             if (acceptedFiles.length) {
                 if (files.length + acceptedFiles.length <= 3) {
                     acceptedFiles.forEach((file, key) => {
@@ -28,12 +28,20 @@ export const ImageDropzone = ({imagesToUpload, setImagesToUpload}) => {
                     alert("Too many files, you can upload only 3");
                 }
             }
-            console.log(files);
         }
     });
 
+    useEffect(() => {
+        if (currImages) {
+            setFiles(currImages);
+        }
+    }, [currImages])
+
     const deleteImage = (file) => {
         setFiles(files.filter((item) => {
+            return item !== file;
+        }));
+        setCurrImages(currImages.filter((item) => {
             return item !== file;
         }));
         const newImages = Object.assign(imagesToUpload);

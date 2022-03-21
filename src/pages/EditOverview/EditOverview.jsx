@@ -6,13 +6,13 @@ import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
 import { Formik, Form, Field } from 'formik';
 import CreatableSelect from 'react-select/creatable';
-import { addTagsApi, createOverviewApi, getTagsApi, userById } from "../../api";
+import {addTagsApi, editOverviewApi, getTagsApi, overviewByIdApi} from "../../api";
 import { useSelector } from "react-redux";
 import { ImageDropzone } from "../../components";
 import { useTranslation } from "react-i18next";
 
 import "react-mde/lib/styles/css/react-mde-all.css";
-import "./CreateOverview.css";
+import "./EditOverview.css";
 
 const converter = new Showdown.Converter({
     tables: true,
@@ -21,25 +21,38 @@ const converter = new Showdown.Converter({
     tasklists: true
 });
 
-export const CreateOverview = () => {
+export const EditOverview = () => {
     const { t } = useTranslation();
-    const { userId } = useParams();
+    const { overviewId } = useParams();
     const { authState } = useSelector((state) => state.auth);
     const [listOfTags, setListOfTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
     const [freeText, setFreeText] = useState();
     const [selectedTab, setSelectedTab] = useState("write");
-    const [thisUser, setThisUser] = useState({});
     const [imagesToUpload, setImagesToUpload] = useState({});
+    const [currImages, setCurrImages] = useState();
+    const [currOverview, setCurrOverview] = useState({});
     let history = useNavigate();
+    let alreadySelectedTags = [];
 
     useEffect(() => {
-        userById(userId).then(user => {
-            if (user) {
-                setThisUser(user);
-            } else {
-                history('/');
-            }
+        overviewByIdApi(overviewId).then((overview) => {
+            setCurrOverview(overview);
+            setFreeText(overview.description);
+            let images = []
+            overview.images.split(" ").forEach((url) => {
+                if (url !== "") {
+                    images.push(url)
+                }
+            });
+            setCurrImages(images);
+            const tags = overview.tags.split(" ");
+            tags.forEach((tag) => {
+                if (tag !== "") {
+                    alreadySelectedTags.push({ value: tag, label: tag });
+                }
+            });
+            setSelectedTags(alreadySelectedTags);
         });
 
         getTagsApi().then((tags) => {
@@ -47,26 +60,31 @@ export const CreateOverview = () => {
                 setListOfTags(prevState => [...prevState, { value: value.tagName, label: value.tagName }]);
             });
         });
-    }, [userId])
+    }, [overviewId])
 
     const initialValues = {
-        title: "",
-        group: "",
-        tags: "",
+        title: currOverview.title,
+        group: currOverview.group,
+        tags: currOverview.tags,
         images: "",
-        ownerUsername: "",
-        description: "",
-        authorRating: "",
-        UserId: userId
+        ownerUsername: currOverview.ownerUsername,
+        description: currOverview.description,
+        authorRating: currOverview.authorRating,
+        UserId: currOverview.UserId
     };
 
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(),
+        group: Yup.string(),
+        authorRating: Yup.string()
     });
 
     const onSubmit = async (data) => {
         addTagsApi(selectedTags).catch((e) => alert(e));
         let imagesUrlsString = '';
+        currImages.map((url) => {
+            imagesUrlsString += url + " ";
+        });
         await axios.all(Object.keys(imagesToUpload).map(async (key) => {
             const formData = new FormData();
             formData.append("file", imagesToUpload[key]);
@@ -83,23 +101,30 @@ export const CreateOverview = () => {
                 return value;
             });
             data.tags = tagsString;
-            data.ownerUsername = thisUser.username;
+            data.ownerUsername = currOverview.ownerUsername;
             data.description = freeText;
-            createOverviewApi(data).then((res) => {
-                history(`/user/${userId}`);
-                history(0);
+            editOverviewApi(data, overviewId).then(() => {
+               history(`/overview/${overviewId}`);
+               history(0);
             });
         })).catch((e) => alert(e));
     }
 
     const onTagsChange = (newValue) => {
-        setSelectedTags(newValue);
+        if (newValue in selectedTags) {
+            setSelectedTags(selectedTags.filter((tag) => {
+                return tag !== newValue;
+            }))
+        } else {
+            setSelectedTags(newValue);
+        }
     };
-
 
     return (
         <div className="create-overview">
-            <Formik initialValues={initialValues}
+            <Formik
+                    enableReinitialize={true}
+                    initialValues={initialValues}
                     onSubmit={onSubmit}
                     validationSchema={validationSchema}>
                 <Form className={`overview-form ${authState.theme}`}>
@@ -125,6 +150,7 @@ export const CreateOverview = () => {
                         <option value="5" >5</option>
                     </Field>
                     <CreatableSelect
+                        defaultValue={alreadySelectedTags}
                         className="overview-form-field tags"
                         isMulti
                         id="inputCreateItemTags"
@@ -134,7 +160,11 @@ export const CreateOverview = () => {
                         }}
                         options={listOfTags}
                         placeholder={t('createOverview.tags')} />
-                    <ImageDropzone imagesToUpload={imagesToUpload} setImagesToUpload={setImagesToUpload} />
+                    <ImageDropzone
+                        imagesToUpload={imagesToUpload}
+                        setImagesToUpload={setImagesToUpload}
+                        currImages={currImages}
+                        setCurrImages={setCurrImages} />
                     <ReactMde
                         className="overview-form-field description"
                         value={freeText}
@@ -150,7 +180,7 @@ export const CreateOverview = () => {
                             }
                         }}
                     />
-                    <button type="submit" className="submit-btn">{t('createOverview.button')}</button>
+                    <button type="submit" className="submit-btn">{t('createOverview.edit')}</button>
                 </Form>
             </Formik>
         </div>

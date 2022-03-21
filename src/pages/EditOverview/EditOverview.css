@@ -1,0 +1,84 @@
+.create-overview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: auto;
+}
+
+.overview-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+.overview-form-field {
+    margin: 5px 0;
+    align-content: center;
+}
+
+.title, .group, .rating, .css-1s2u09g-control, .css-1pahdxg-control, .mde {
+    height: 40px;
+    width: 90vw;
+    max-width: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    background-color: #3a68e7;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    transition: background-color linear 0.1s;
+    margin: 10px 0;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    background-color: darkblue;
+}
+
+.overview-form.dark .title, .overview-form.dark .group,
+.overview-form.dark .rating, .overview-form.dark .css-1s2u09g-control,
+.overview-form.dark .css-1pahdxg-control, .overview-form.dark .mde-header,
+.overview-form.dark .mde-text, .overview-form.dark .mde-header * {
+    background-color: #565252;
+    color: white !important;
+}
+
+.overview-form.dark .css-1pahdxg-control {
+    border-color: white;
+    box-shadow: 0 0 0 1px white;
+}
+
+.overview-form.dark .title::placeholder, .overview-form.dark .tags .css-14el2xx-placeholder {
+    color: white;
+}
+
+.group option, .rating option {
+    position: relative;
+    border-top: 1px solid rgba(224, 229, 231, 0.5);
+    padding: 10px 15px;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.group option:hover, .rating option:hover {
+    background-color: rgba(224, 229, 231, 0.5);
+}
+
+.overview-form.dark .submit-btn {
+    background-color: #565252;
+}
+
+.overview-form.dark .submit-btn:hover {
+    background-color: #111;
+}

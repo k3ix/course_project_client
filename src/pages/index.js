@@ -5,3 +5,5 @@ export { WrongPath } from "./WrongPath";
 export { User } from './User'
 export { CreateOverview } from './CreateOverview';
 export { AdminPanel } from './AdminPanel';
+export { EditOverview } from "./EditOverview";
+export { Overview } from './Overview';

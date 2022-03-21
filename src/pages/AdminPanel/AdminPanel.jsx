@@ -22,8 +22,6 @@ export const AdminPanel = () => {
         });
     }, []);
 
-    console.log(listOfUsers)
-
     const blockUsers = async () => {
         const blockIds = listOfIds;
         blockUsersApi(blockIds).then(() => {
@@ -82,7 +80,7 @@ export const AdminPanel = () => {
                 return value;
             });
         });
-    }
+    };
 
     return (
         (!authState.isAdmin &&
@@ -119,7 +117,7 @@ export const AdminPanel = () => {
                                 }
                             }
                         ]}
-                        autoHeight={listOfUsers}
+                        autoHeight
                         rows={listOfUsers}
                         pageSize={10}
                         checkboxSelection
