@@ -28,3 +28,8 @@ export const overviewByIdApi = async (overviewId) => {
     const res = await axios.get(`https://course-project-itransition.herokuapp.com/overviews/byId/${overviewId}`)
     return res.data;
 }
+
+export const getAllOverviewsApi = async () => {
+    const res = await axios.get("https://course-project-itransition.herokuapp.com/overviews");
+    return res.data;
+}

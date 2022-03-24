@@ -11,7 +11,8 @@ import {
     AdminPanel,
     CreateOverview,
     Overview,
-    EditOverview
+    EditOverview,
+    TagClickResult
 } from "./pages"
 
 import {
@@ -44,6 +45,7 @@ function App() {
                     <Route path="/user/:userId/create-overview" element={<CreateOverview />}/>
                     <Route path="/overview/:overviewId" element={<Overview />}/>
                     <Route path="/overview/:overviewId/edit" element={<EditOverview />}/>
+                    <Route path="/by-tag/:tag" element={<TagClickResult />} />
                     <Route path="*" element={<WrongPath />} />
                 </Routes>
                 <div className="footer">

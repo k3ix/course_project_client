@@ -74,5 +74,19 @@
     "tags": "Enter tags",
     "button": "Create overview",
     "edit": "Edit overview"
+  },
+  "overview": {
+    "lastUpdated": "Last updated: ",
+    "authorRating": "Author Rating: ",
+    "description": "Description:",
+    "usersRating": "Users average rating: ",
+    "deleteTitle": "Delete comment",
+    "sendTitle": "Send comment",
+    "group": {
+      "group": "Group: ",
+      "books": "Books",
+      "movies": "Movies",
+      "games": "Videogames"
+    }
   }
 }

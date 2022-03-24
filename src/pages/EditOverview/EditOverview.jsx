@@ -76,7 +76,8 @@ export const EditOverview = () => {
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(),
         group: Yup.string(),
-        authorRating: Yup.string()
+        authorRating: Yup.string(),
+        description: Yup.string().max(240)
     });
 
     const onSubmit = async (data) => {

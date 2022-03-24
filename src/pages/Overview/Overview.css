@@ -14,3 +14,161 @@
     background-color: #565252;
 }
 
+.overview-title {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin: 5px 0 !important;
+}
+
+.overview-username {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5px !important;
+}
+
+.overview-lastUpdated {
+    font-size: 12px;
+    color: grey;
+    margin-bottom: 5px !important;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    margin: 5px;
+}
+
+.overview-info div {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.overview-description-container {
+    border: 2px solid #3a68e7;
+    border-radius: 5px;
+    padding: 5px 0 5px 5px;
+}
+
+.overview-page.dark .overview-description-container {
+    border-color: white;
+}
+
+.overview-description-title {
+    border-bottom: 1px solid grey;
+}
+
+.overview-description-body {
+    width: 45vw !important;
+    max-width: 972px;
+}
+
+.likes-ratings {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    vertical-align: middle;
+}
+
+.likes-ratings p {
+    margin: 0 0 0 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.overview-star {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.comment-section {
+    background-color: rgba(255,255,255,0.3);
+    border: 1px solid lightgray;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    width: 40vw !important;
+    max-width: 300px;
+    padding: 15px;
+    margin: 15px auto;
+}
+
+.overview-page.dark .comment-section {
+    background-color: rgba(114, 108, 108, 0.3)
+}
+
+.comment-item {
+    border-bottom: 1px solid black;
+    padding-top: 8px;
+    margin-bottom: 10px !important;
+}
+
+.comment-item button {
+    color: black;
+    width: 10px;
+    height: 10px;
+}
+
+.overview-page.dark .comment-section .comment-item button {
+    color: white;
+}
+
+.comment-body {
+    margin: 6px;
+}
+
+.comment-date {
+    font-size: 12px;
+}
+
+.no-comments {
+    font-size: 12px;
+    color: rgb(110, 110, 110);
+    width: 100%;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.comments-input {
+    width: 100%;
+}
+
+.comments-input-container.dark .comments-input {
+    background-color: darkgray;
+}
+
+.input-adornment button {
+    color: #3a68e7;
+    margin: 0;
+}
+
+.input-adornment button:hover {
+    background-color: lightgrey;
+}
+
+.input-adornment.dark button {
+    color: black !important;
+}
+
+.itemTag{
+    padding: 5px;
+    margin-right: 5px !important;
+    border-radius: 10px;
+    background-color: #3a68e7;
+    color: white;
+}
+
+.itemTag:hover{
+    cursor: pointer;
+    color: #3a68e7;
+    background-color: transparent;
+}
+
+.overview-page.dark .itemTag {
+    background-color: white;
+    color: black;
+}
+
+.overview-page.dark .itemTag:hover {
+    color: white;
+    background-color: transparent;
+}
