@@ -1,0 +1,121 @@
+.search {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    border-radius: 10px;
+    margin-left: 0px !important;
+}
+
+.search-inputs {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+.search input {
+    background-color: white;
+    border: 0;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 16px;
+    height: 40px;
+    width: auto;
+    padding-left: 10px;
+    margin: 5px 0 5px 5px;
+}
+
+.search.dark input {
+    background-color: darkgray;
+    color: white;
+}
+
+.search.dark input::placeholder {
+    color: white;
+}
+
+@media screen and (max-width: 450px) {
+    .search input {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .search input {
+        width: 60px;
+    }
+}
+
+.search-icon {
+    height: 80%;
+    width: 40px;
+    background-color: white;
+    color: black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: grid;
+    place-items: center;
+}
+
+.search-icon:hover {
+    cursor: pointer;
+}
+
+.search.dark .search-icon {
+    background-color: darkgray;
+    color: white;
+}
+
+input:focus {
+    outline: none;
+}
+
+.search-icon svg {
+    height: 42px;
+    font-size: 25px;
+}
+
+.data-result {
+    width: auto;
+    height: auto;
+    max-width: 220px;
+    max-height: 200px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    z-index:1;
+    position: absolute;
+    margin-left: 10px;
+}
+
+.data-result .data-overview {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.data-overview:hover{
+    cursor: pointer;
+    background-color: rgb(252, 250, 241);
+}
+
+.data-overview p {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.data-overview a {
+    text-decoration: none;
+}
+
+.data-overview a:hover {
+    background-color: lightgrey;
+}
+
+#clear-btn {
+    cursor: pointer;
+}

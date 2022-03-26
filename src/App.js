@@ -12,7 +12,7 @@ import {
     CreateOverview,
     Overview,
     EditOverview,
-    TagClickResult
+    TagClickResult, SearchResult
 } from "./pages"
 
 import {
@@ -20,21 +20,27 @@ import {
     ThemeChanger,
     LangChanger
 } from "./components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { authCheck } from "./actions";
+import { getAllOverviewsApi } from "./api";
 
 function App() {
-    const { authState } = useSelector((state) => state.auth)
+    const { authState } = useSelector((state) => state.auth);
+    const [listOfOverviews, setListOfOverviews] = useState([]);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(authCheck());
+
+        getAllOverviewsApi().then((res) => {
+            setListOfOverviews(res);
+        });
     }, []);
 
     return (
         <div className={`App ${authState.theme}`}>
             <Router>
                 <div className="navBar-container">
-                    <NavigationMenu />
+                    <NavigationMenu data={listOfOverviews} />
                 </div>
                 <Routes>
                     <Route path="/" element={<Home />}/>
@@ -46,6 +52,7 @@ function App() {
                     <Route path="/overview/:overviewId" element={<Overview />}/>
                     <Route path="/overview/:overviewId/edit" element={<EditOverview />}/>
                     <Route path="/by-tag/:tag" element={<TagClickResult />} />
+                    <Route path="/search-result/:word" element={<SearchResult />} />
                     <Route path="*" element={<WrongPath />} />
                 </Routes>
                 <div className="footer">

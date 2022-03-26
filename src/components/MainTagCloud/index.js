@@ -1,0 +1,1 @@
+export { MainTagCloud } from './MainTagCloud';

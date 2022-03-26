@@ -26,7 +26,6 @@ export const Login = () => {
     const onSubmit = async (data) => {
         await dispatch(login(data));
         history("/");
-        //history(0);
     };
 
     return (

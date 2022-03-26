@@ -69,7 +69,7 @@ export const Overview = () => {
             });
             setAllRatingsState(allRatings);
             setRatingsAverage(() => {
-                return allRatings.reduce((a, b) => a + b, 0) / allRatings.length;
+                return (allRatings.reduce((a, b) => a + b, 0) / allRatings.length).toFixed(1);
             });
         });
 
@@ -146,7 +146,7 @@ export const Overview = () => {
         mutableRatings.splice(index, 1);
         setAllRatingsState(mutableRatings);
         setRatingsAverage(() => {
-            return mutableRatings.reduce((a, b) => a + b, 0) / mutableRatings.length;
+            return (mutableRatings.reduce((a, b) => a + b, 0) / mutableRatings.length).toFixed(1);
         });
         const accessToken = localStorage.getItem("accessToken");
         ratingClickApi(overviewId, currRatingValue, accessToken).then(() => {
@@ -165,10 +165,10 @@ export const Overview = () => {
                     </Grid>
                 </Grid>
             </Container>
-            <Grid container justifyContent="flex-start" alignItems="flex-start">
+            <Grid container justifyContent="flex-start" alignItems="flex-start" >
                 {currTags.map((value, key) => {
                     return (
-                        <Grid item key={key} onClick={() => {history(`/by-tag/${value}`)}} className="itemTag">
+                        <Grid item key={key} onClick={() => {history(`/by-tag/${value}`)}} className="overview-tag">
                             {"#" + value}
                         </Grid>
                     )
@@ -215,7 +215,12 @@ export const Overview = () => {
                         />
                     )
                 })}
-                <p>{t('overview.usersRating') + ratingsAverage}</p>
+                {(ratingsAverage === "NaN") ?
+                    (
+                        <p>{t('overview.noRatings')}</p>
+                    ) : (
+                        <p>{t('overview.usersRating') + ratingsAverage}</p>
+                    )}
             </div>
             <Grid container direction="column" justifyContent="flex-start"
                   alignItems="flex-start" className="comment-section">

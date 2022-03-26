@@ -1,0 +1,40 @@
+.home-page {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.submit-btn-home-show-more {
+    margin-bottom: 8px !important;
+    background-color: #3a68e7 !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 10px !important;
+    color: white !important;
+    transition: background-color linear 0.1s !important;
+}
+
+.submit-btn-home-show-more:hover {
+    cursor: pointer !important;
+    background-color: darkblue !important;
+}
+
+.submit-btn-home-show-more.dark {
+    background-color: #565252 !important;
+}
+
+.submit-btn-home-show-more.dark:hover {
+    background-color: #111 !important;
+}
+
+.home-text {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.home-text.dark {
+    color: white;
+}

@@ -34,7 +34,7 @@
     margin-bottom: 5px !important;
 }
 
-img {
+.overview-page img {
     width: 200px;
     height: 200px;
     margin: 5px;
@@ -149,7 +149,7 @@ img {
     color: black !important;
 }
 
-.itemTag{
+.overview-tag{
     padding: 5px;
     margin-right: 5px !important;
     border-radius: 10px;
@@ -157,18 +157,18 @@ img {
     color: white;
 }
 
-.itemTag:hover{
+.overview-tag:hover{
     cursor: pointer;
     color: #3a68e7;
     background-color: transparent;
 }
 
-.overview-page.dark .itemTag {
+.overview-page.dark .overview-tag {
     background-color: white;
     color: black;
 }
 
-.overview-page.dark .itemTag:hover {
+.overview-page.dark .overview-tag:hover {
     color: white;
     background-color: transparent;
 }

@@ -8,3 +8,4 @@ export { AdminPanel } from './AdminPanel';
 export { EditOverview } from "./EditOverview";
 export { Overview } from './Overview';
 export { TagClickResult } from "./TagClickResult";
+export { SearchResult } from './SearchResult';

@@ -9,8 +9,9 @@ import { useTranslation } from "react-i18next";
 import { ProfileLink } from "../ProfileLink";
 import { Close } from "@mui/icons-material";
 import OutsideClickHandler from 'react-outside-click-handler';
+import {SearchBar} from "../SearchBar";
 
-export const NavigationMenu = () => {
+export const NavigationMenu = ({ data }) => {
     const { t } = useTranslation();
     const { authState } = useSelector((state) => state.auth);
     let history = useNavigate();
@@ -48,6 +49,7 @@ export const NavigationMenu = () => {
                     </div>
                 </OutsideClickHandler>
             }
+            <SearchBar data={data} />
             {authState.status &&
                 <div className="prof-logo">
                     <ProfileLink />
@@ -57,15 +59,3 @@ export const NavigationMenu = () => {
         </div>
             );
 };
-
-         {/*<div className={`navBar ${authState.theme}`}>*/}
-         {/*    <Button variant="text" className="navbtn" onClick={homeClick}>{t('navMenu.mainPage')}</Button>*/}
-         {/*    {!authState.status ? (*/}
-         {/*        <>*/}
-         {/*            <Button variant="text" className="navbtn" onClick={registerClick}>{t('navMenu.register')}</Button>*/}
-         {/*            <Button variant="text" className="navbtn" onClick={loginClick}>{t('navMenu.login')}</Button>*/}
-         {/*        </>*/}
-         {/*    ) : (*/}
-
-         {/*</div>*/}
-

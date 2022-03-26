@@ -1,0 +1,35 @@
+.tag-cloud-container {
+    margin: 8px 0px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.tag-cloud-container.dark {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.overview-home-tag {
+    padding: 5px;
+    margin: 6px;
+    display: inline-block;
+    border-radius: 10px;
+    background-color: #3a68e7;
+    color: white;
+}
+
+.overview-home-tag:hover {
+    cursor: pointer;
+    color: #3a68e7;
+    background-color: transparent;
+}
+
+.overview-home-tag.dark {
+    background-color: white;
+    color: black;
+}
+
+.overview-home-tag.dark:hover {
+    color: white;
+    background-color: transparent;
+}

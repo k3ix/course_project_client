@@ -82,11 +82,33 @@
     "usersRating": "Users average rating: ",
     "deleteTitle": "Delete comment",
     "sendTitle": "Send comment",
+    "noRatings": "No ratings",
     "group": {
       "group": "Group: ",
       "books": "Books",
       "movies": "Movies",
       "games": "Videogames"
     }
+  },
+  "tagClick": {
+    "lastUpdated": "Last updated: ",
+    "group": {
+      "books": "Books",
+      "movies": "Movies",
+      "games": "Videogames"
+    },
+    "authorRating": "AR: ",
+    "resultsTag": "Results for tag ",
+    "noResults": "No results for tag ",
+    "noRatings": "No ratings"
+  },
+  "search": "Search",
+  "searchResult": {
+    "result": "Search results for ",
+    "noResult": "Nothing found for "
+  },
+  "home": {
+    "last": "Last overviews:",
+    "rating": "Highest rating overviews:"
   }
 }

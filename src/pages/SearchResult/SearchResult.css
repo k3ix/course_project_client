@@ -102,7 +102,7 @@
     color: black;
 }
 
-.submit-btn-show-more {
+.submit-btn-search-show-more {
     margin-bottom: 8px !important;
     background-color: #3a68e7 !important;
     border: none !important;
@@ -112,15 +112,15 @@
     transition: background-color linear 0.1s !important;
 }
 
-.submit-btn-show-more:hover {
+.submit-btn-search-show-more:hover {
     cursor: pointer !important;
     background-color: darkblue !important;
 }
 
-.submit-btn-show-more.dark {
+.submit-btn-search-show-more.dark {
     background-color: #565252 !important;
 }
 
-.submit-btn-show-more.dark:hover {
+.submit-btn-search-show-more.dark:hover {
     background-color: #111 !important;
 }

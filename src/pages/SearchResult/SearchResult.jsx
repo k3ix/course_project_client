@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { getAllOverviewsApi } from "../../api";
 import { Box, Button, Container, Grid } from "@mui/material";
 import { FavoriteBorder } from "@mui/icons-material";
 import { FaStar } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 
-import './TagClickResult.css';
+import './SearchResult.css';
 
-export const TagClickResult = () => {
-    let { tag } = useParams();
+export const SearchResult = () => {
+    let { word } = useParams();
     const { t } = useTranslation();
     let history = useNavigate();
     const [listOfCurrOverviews, setListOfCurrOverviews] = useState([]);
@@ -20,7 +20,9 @@ export const TagClickResult = () => {
     useEffect(() => {
         getAllOverviewsApi().then((res) => {
             const filteredOverviews = res.filter((value) => {
-                return value.tags.includes(tag + " ");
+                return value.title.toLowerCase().includes(word.toLowerCase())
+                    || value.tags.toLowerCase().includes(word.toLowerCase()) ||
+                    value.description.toLowerCase().includes(word.toLowerCase());
             }).sort((a, b) => {
                 return (b.id - a.id);
             });
@@ -36,8 +38,8 @@ export const TagClickResult = () => {
             });
             setListOfAllOverviews(filteredOverviews);
             setListOfCurrOverviews(filteredOverviews.slice(0, 5));
-        });
-    }, [tag]);
+        })
+    }, [word]);
 
     const showMoreBtn = () => {
         if(listOfCurrOverviews.length + 5 >= listOfAllOverviews.length){
@@ -51,10 +53,10 @@ export const TagClickResult = () => {
         <div className={`tag-click-result ${authState.theme}`}>
             {listOfCurrOverviews.length ?
                 <div className="result-text">
-                    {t('tagClick.resultsTag') + "\"#" + tag + "\""}
+                    {t('searchResult.result') + "\"" + word + "\""}
                 </div> :
                 <div className="result-text">
-                    {t('tagClick.noResults') + "\"#" + tag + "\""}
+                    {t('searchResult.noResult') + "\"" + word + "\""}
                 </div>
             }
             <Container maxWidth="xs" >
@@ -114,7 +116,7 @@ export const TagClickResult = () => {
                     })}
                     {!(listOfCurrOverviews.length >= listOfAllOverviews.length) &&
                         <Button onClick={showMoreBtn} id="submit-btn"
-                                className={`submit-btn-show-more ${authState.theme}`}>
+                                className={`submit-btn-search-show-more ${authState.theme}`}>
                             Show more
                         </Button>
                     }
