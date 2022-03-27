@@ -41,9 +41,11 @@ export const ImageDropzone = ({ imagesToUpload, setImagesToUpload, currImages, s
         setFiles(files.filter((item) => {
             return item !== file;
         }));
-        setCurrImages(currImages.filter((item) => {
-            return item !== file;
-        }));
+        if (currImages) {
+            setCurrImages(currImages.filter((item) => {
+                return item !== file;
+            }));
+        }
         const newImages = Object.assign(imagesToUpload);
         delete newImages[file];
         setImagesToUpload(newImages);
