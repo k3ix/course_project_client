@@ -77,7 +77,6 @@ export const EditOverview = () => {
         title: Yup.string().required(t('createOverview.titleRequired')),
         group: Yup.string().required(t('createOverview.groupRequired')),
         authorRating: Yup.number().required(t('createOverview.authorRatingRequired')),
-        description: Yup.string().max(240)
     });
 
     const onSubmit = async (data) => {
