@@ -191,87 +191,91 @@ export const Overview = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <div className="likes-ratings">
-                <IconButton onClick={() => {likeItem(overviewId)}} className="icon" >
-                    {isLiked ?
-                        <Favorite /> :
-                        <FavoriteBorder />
-                    }
-                    {overview.Likes.length}
-                </IconButton>
-                {stars.map((_, index) => {
-                    return (
-                        <FaStar
-                            className="overview-star"
-                            key={index}
-                            size={24}
-                            color={(hoverRatingValue || ratingValue) > index ? "orange" : "#a9a9a9" }
-                            onClick={() => ratingClick(index + 1)}
-                            onMouseEnter={() => setHoverRatingValue(index + 1)}
-                            onMouseLeave={() => setHoverRatingValue(null)}
-                        />
-                    )
-                })}
-                {(ratingsAverage === "NaN") ?
-                    (
-                        <p>{t('overview.noRatings')}</p>
-                    ) : (
-                        <p>{t('overview.usersRating') + ratingsAverage}</p>
-                    )}
-            </div>
-            <Grid container direction="column" justifyContent="flex-start"
-                  alignItems="flex-start" className="comment-section">
-                {currComments.length ?
-                    currComments.map((value, key) => {
+            {authState.status &&
+                <div className="likes-ratings">
+                    <IconButton onClick={() => {likeItem(overviewId)}} className="icon" >
+                        {isLiked ?
+                            <Favorite /> :
+                            <FavoriteBorder />
+                        }
+                        {overview.Likes.length}
+                    </IconButton>
+                    {stars.map((_, index) => {
                         return (
-                            <Grid
-                                item
-                                key={key}
-                                container
-                                direction="column"
-                                justifyContent="flex-start"
-                                alignItems="flex-start"
-                                spacing={1}
-                                className="comment-item"
-                            >
-                                {(authState.username === value.username || authState.isAdmin) &&
-                                    <IconButton onClick={() => deleteComment(value.id)} title={t('overview.deleteTitle')} >
-                                        <Delete />
-                                    </IconButton>
-                                }
-                                <Grid item>
-                                    <strong>{value.username}</strong>
-                                    <div className="comment-body" >{value.commentBody}</div>
-                                    <div className="comment-date" >{new Date(value.createdAt).toLocaleString()}</div>
-                                </Grid>
-                            </Grid>
+                            <FaStar
+                                className="overview-star"
+                                key={index}
+                                size={24}
+                                color={(hoverRatingValue || ratingValue) > index ? "orange" : "#a9a9a9" }
+                                onClick={() => ratingClick(index + 1)}
+                                onMouseEnter={() => setHoverRatingValue(index + 1)}
+                                onMouseLeave={() => setHoverRatingValue(null)}
+                            />
                         )
-                    }) :
-                <p className="no-comments">No comments here</p>
-                }
-                <Grid item className={`comments-input-container ${authState.theme}`}>
-                    {authState.status &&
-                        <div>
-                            <Paper >
-                                <OutlinedInput
-                                    className="comments-input"
-                                    type="text"
-                                    value={newComment}
-                                    onChange={(event) => {setNewComment(event.target.value)}}
-                                    onKeyDown={handleKeyDown}
-                                    endAdornment={
-                                        <InputAdornment position="end" className={`input-adornment ${authState.theme}`}>
-                                            <IconButton onClick={addComment} title={t('overview.sendTitle')}>
-                                                <Send />
-                                            </IconButton>
-                                        </InputAdornment>
+                    })}
+                    {(ratingsAverage === "NaN") ?
+                        (
+                            <p>{t('overview.noRatings')}</p>
+                        ) : (
+                            <p>{t('overview.usersRating') + ratingsAverage}</p>
+                        )}
+                </div>
+            }
+            {authState.status &&
+                <Grid container direction="column" justifyContent="flex-start"
+                      alignItems="flex-start" className="comment-section">
+                    {currComments.length ?
+                        currComments.map((value, key) => {
+                            return (
+                                <Grid
+                                    item
+                                    key={key}
+                                    container
+                                    direction="column"
+                                    justifyContent="flex-start"
+                                    alignItems="flex-start"
+                                    spacing={1}
+                                    className="comment-item"
+                                >
+                                    {(authState.username === value.username || authState.isAdmin) &&
+                                        <IconButton onClick={() => deleteComment(value.id)} title={t('overview.deleteTitle')} >
+                                            <Delete />
+                                        </IconButton>
                                     }
-                                    />
-                            </Paper>
-                        </div>
+                                    <Grid item>
+                                        <strong>{value.username}</strong>
+                                        <div className="comment-body" >{value.commentBody}</div>
+                                        <div className="comment-date" >{new Date(value.createdAt).toLocaleString()}</div>
+                                    </Grid>
+                                </Grid>
+                            )
+                        }) :
+                        <p className="no-comments">No comments here</p>
                     }
+                    <Grid item className={`comments-input-container ${authState.theme}`}>
+                        {authState.status &&
+                            <div>
+                                <Paper >
+                                    <OutlinedInput
+                                        className="comments-input"
+                                        type="text"
+                                        value={newComment}
+                                        onChange={(event) => {setNewComment(event.target.value)}}
+                                        onKeyDown={handleKeyDown}
+                                        endAdornment={
+                                            <InputAdornment position="end" className={`input-adornment ${authState.theme}`}>
+                                                <IconButton onClick={addComment} title={t('overview.sendTitle')}>
+                                                    <Send />
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                    />
+                                </Paper>
+                            </div>
+                        }
+                    </Grid>
                 </Grid>
-            </Grid>
+            }
         </div>
     );
 };
