@@ -36,7 +36,7 @@ export const Home = () => {
             const sortedLastOverviews = res.sort((a, b) => {
                 return b.updatedAt.localeCompare(a.updatedAt);
             });
-            setLastOverviews(sortedLastOverviews.slice(0, 5));
+            setLastOverviews(sortedLastOverviews.slice(0, 4));
             setAllLastOverviews(sortedLastOverviews);
             let byRating = [];
             const sortedByRating = res.filter((value) => {
@@ -92,19 +92,23 @@ export const Home = () => {
                             return (
                                 <Grid item key={key} container justifyContent="center" alignItems="center">
                                     <Box className={`overview ${authState.theme}`}>
-                                        <header onClick={() => {history(`/overview/${value.id}`)}} className="overview-header">
+                                        <header onClick={() => {history(`/overview/${value.id}`)}}
+                                                className="overview-header">
                                             <Grid container direction="column" justifyContent="center"
                                                   alignItems="center" >
                                                 <Grid item>{value.title}</Grid>
                                                 <Grid item>{t(`tagClick.group.${value.group}`)}</Grid>
-                                                <Grid item>{t('tagClick.lastUpdated') + new Date(value.updatedAt).toLocaleString()}</Grid>
+                                                <Grid item>{t('tagClick.lastUpdated') + new Date(value.updatedAt)
+                                                    .toLocaleString()}</Grid>
                                                 <Grid item>{value.ownerUsername}</Grid>
                                             </Grid>
                                         </header>
-                                        <Grid item container justifyContent="center" alignItems="center" className="tag-container">
+                                        <Grid item container justifyContent="center"
+                                              alignItems="center" className="tag-container">
                                             {thisTags.map((value, key) => {
                                                 return(
-                                                    <Grid item key={key} onClick={() => {history(`/by-tag/${value}`)}} className="overview-tag" style={{ margin: "6px" }}>
+                                                    <Grid item key={key} onClick={() => {history(`/by-tag/${value}`)}}
+                                                          className="overview-tag" style={{ margin: "6px" }}>
                                                         {"#" + value}
                                                     </Grid>
                                                 )
@@ -159,19 +163,23 @@ export const Home = () => {
                             return (
                                 <Grid item key={key} container justifyContent="center" alignItems="center">
                                     <Box className={`overview ${authState.theme}`}>
-                                        <header onClick={() => {history(`/overview/${value.id}`)}} className="overview-header">
+                                        <header onClick={() => {history(`/overview/${value.id}`)}}
+                                                className="overview-header">
                                             <Grid container direction="column" justifyContent="center"
                                                   alignItems="center" >
                                                 <Grid item>{value.title}</Grid>
                                                 <Grid item>{t(`tagClick.group.${value.group}`)}</Grid>
-                                                <Grid item>{t('tagClick.lastUpdated') + new Date(value.updatedAt).toLocaleString()}</Grid>
+                                                <Grid item>{t('tagClick.lastUpdated') + new Date(value.updatedAt)
+                                                    .toLocaleString()}</Grid>
                                                 <Grid item>{value.ownerUsername}</Grid>
                                             </Grid>
                                         </header>
-                                        <Grid item container justifyContent="center" alignItems="center" className="tag-container">
+                                        <Grid item container justifyContent="center" alignItems="center"
+                                              className="tag-container">
                                             {thisTags.map((value, key) => {
                                                 return(
-                                                    <Grid item key={key} onClick={() => {history(`/by-tag/${value}`)}} className="overview-tag" style={{ margin: "6px" }}>
+                                                    <Grid item key={key} onClick={() => {history(`/by-tag/${value}`)}}
+                                                          className="overview-tag" style={{ margin: "6px" }}>
                                                         {"#" + value}
                                                     </Grid>
                                                 )

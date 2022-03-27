@@ -82,3 +82,12 @@
 .overview-form.dark .submit-btn:hover {
     background-color: #111;
 }
+
+.create-overview span {
+    color: red;
+    margin-top: 5px;
+}
+
+.create-overview.dark span {
+    color: white;
+}

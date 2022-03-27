@@ -4,7 +4,7 @@ import { useNavigate, useParams} from "react-router-dom";
 import * as Yup from 'yup';
 import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
-import { Formik, Form, Field } from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import CreatableSelect from 'react-select/creatable';
 import { addTagsApi, createOverviewApi, getTagsApi, userById } from "../../api";
 import { useSelector } from "react-redux";
@@ -61,7 +61,9 @@ export const CreateOverview = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        title: Yup.string().required(),
+        title: Yup.string().required(t('createOverview.titleRequired')),
+        group: Yup.string().required(t('createOverview.groupRequired')),
+        authorRating: Yup.number().required(t('createOverview.authorRatingRequired')),
         description: Yup.string().max(240)
     });
 
@@ -99,23 +101,26 @@ export const CreateOverview = () => {
 
 
     return (
-        <div className="create-overview">
+        <div className={`create-overview ${authState.theme}`}>
             <Formik initialValues={initialValues}
                     onSubmit={onSubmit}
                     validationSchema={validationSchema}>
                 <Form className={`overview-form ${authState.theme}`}>
+                    <ErrorMessage name="title" component="span"/>
                     <Field
                         autoComplete="off"
                         id="titleField"
                         className="overview-form-field title"
                         name="title"
                         placeholder={t("createOverview.titlePlaceholder")} />
+                    <ErrorMessage name="group" component="span"/>
                     <Field as="select" className="overview-form-field group" id="groupCreateOverview" name="group">
                         <option value="" hidden >{t('createOverview.group.placeholder')}</option>
                         <option value="books" >{t('createOverview.group.books')}</option>
                         <option value="movies" >{t('createOverview.group.movies')}</option>
                         <option value="games" >{t('createOverview.group.games')}</option>
                     </Field>
+                    <ErrorMessage name="authorRating" component="span"/>
                     <Field as="select" className="overview-form-field rating" id="ratingCreateOverview" name="authorRating">
                         <option value="" hidden >{t('createOverview.rating')}</option>
                         <option value="0" >0</option>
@@ -136,6 +141,7 @@ export const CreateOverview = () => {
                         options={listOfTags}
                         placeholder={t('createOverview.tags')} />
                     <ImageDropzone imagesToUpload={imagesToUpload} setImagesToUpload={setImagesToUpload} />
+                    <ErrorMessage name="description" component="span"/>
                     <ReactMde
                         className="overview-form-field description"
                         value={freeText}

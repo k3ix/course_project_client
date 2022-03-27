@@ -4,7 +4,7 @@ import { useNavigate, useParams} from "react-router-dom";
 import * as Yup from 'yup';
 import ReactMde from 'react-mde';
 import * as Showdown from 'showdown';
-import { Formik, Form, Field } from 'formik';
+import {Formik, Form, Field, ErrorMessage} from 'formik';
 import CreatableSelect from 'react-select/creatable';
 import {addTagsApi, editOverviewApi, getTagsApi, overviewByIdApi} from "../../api";
 import { useSelector } from "react-redux";
@@ -74,9 +74,9 @@ export const EditOverview = () => {
     };
 
     const validationSchema = Yup.object().shape({
-        title: Yup.string().required(),
-        group: Yup.string(),
-        authorRating: Yup.string(),
+        title: Yup.string().required(t('createOverview.titleRequired')),
+        group: Yup.string().required(t('createOverview.groupRequired')),
+        authorRating: Yup.number().required(t('createOverview.authorRatingRequired')),
         description: Yup.string().max(240)
     });
 
@@ -122,25 +122,28 @@ export const EditOverview = () => {
     };
 
     return (
-        <div className="create-overview">
+        <div className={`create-overview ${authState.theme}`}>
             <Formik
                     enableReinitialize={true}
                     initialValues={initialValues}
                     onSubmit={onSubmit}
                     validationSchema={validationSchema}>
                 <Form className={`overview-form ${authState.theme}`}>
+                    <ErrorMessage name="title" component="span"/>
                     <Field
                         autoComplete="off"
                         id="titleField"
                         className="overview-form-field title"
                         name="title"
                         placeholder={t("createOverview.titlePlaceholder")} />
+                    <ErrorMessage name="group" component="span"/>
                     <Field as="select" className="overview-form-field group" id="groupCreateOverview" name="group">
                         <option value="" hidden >{t('createOverview.group.placeholder')}</option>
                         <option value="books" >{t('createOverview.group.books')}</option>
                         <option value="movies" >{t('createOverview.group.movies')}</option>
                         <option value="games" >{t('createOverview.group.games')}</option>
                     </Field>
+                    <ErrorMessage name="authorRating" component="span"/>
                     <Field as="select" className="overview-form-field rating" id="ratingCreateOverview" name="authorRating">
                         <option value="" hidden >{t('createOverview.rating')}</option>
                         <option value="0" >0</option>

@@ -73,7 +73,10 @@
     "rating": "Choose rating",
     "tags": "Enter tags",
     "button": "Create overview",
-    "edit": "Edit overview"
+    "edit": "Edit overview",
+    "titleRequired": "Title is required",
+    "groupRequired": "Group is required",
+    "authorRatingRequired": "Author Rating is required"
   },
   "overview": {
     "lastUpdated": "Last updated: ",

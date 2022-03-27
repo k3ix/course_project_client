@@ -6,16 +6,11 @@ import { addCommentApi, deleteCommentApi, getCommentsApi, likeApi, overviewByIdA
 import { Container, Grid, IconButton, InputAdornment, OutlinedInput, Paper } from "@mui/material";
 import { Delete, Favorite, FavoriteBorder, Send } from "@mui/icons-material";
 import { io } from "socket.io-client";
-import './Overview.css';
+import ReactMarkdown from 'react-markdown'
 import { FaStar } from "react-icons/fa";
+import './Overview.css';
 let socket;
 
-
-
-const colors = {
-    orange: "#FFBASA",
-    grey: "#a9a9a9"
-}
 
 
 export const Overview = () => {
@@ -191,7 +186,9 @@ export const Overview = () => {
                 <Grid item container direction="column" justifyContent="flex-start"
                       alignItems="flex-start" className="overview-description-container" >
                     <Grid item className="overview-description-title">{t('overview.description')}</Grid>
-                    <Grid item className="overview-description-body">{overview.description}</Grid>
+                    <Grid item className="overview-description-body">
+                        <ReactMarkdown>{overview.description}</ReactMarkdown>
+                    </Grid>
                 </Grid>
             </Grid>
             <div className="likes-ratings">
