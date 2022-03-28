@@ -35,6 +35,7 @@ export const AdminPanel = () => {
                 }));
                 return value;
             });
+            history(0);
         });
     };
 
@@ -79,6 +80,7 @@ export const AdminPanel = () => {
                 }));
                 return value;
             });
+            history(0);
         });
     };
 
