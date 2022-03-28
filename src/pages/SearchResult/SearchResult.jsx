@@ -117,7 +117,7 @@ export const SearchResult = () => {
                     {!(listOfCurrOverviews.length >= listOfAllOverviews.length) &&
                         <Button onClick={showMoreBtn} id="submit-btn"
                                 className={`submit-btn-search-show-more ${authState.theme}`}>
-                            Show more
+                            {t('showMore')}
                         </Button>
                     }
                 </Grid>

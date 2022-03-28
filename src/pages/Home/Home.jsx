@@ -147,7 +147,7 @@ export const Home = () => {
                         {!(lastOverviews.length >= allLastOverviews.length) &&
                             <Button onClick={lastShowMore} id="submit-btn-last"
                                     className={`submit-btn-home-show-more ${authState.theme}`}>
-                                Show more
+                                {t('showMore')}
                             </Button>
                         }
                     </Grid>
@@ -218,7 +218,7 @@ export const Home = () => {
                         {!(ratingOverviews.length >= allRatingOverviews.length) &&
                             <Button onClick={ratingsShowMore} id="submit-btn-rating"
                                     className={`submit-btn-home-show-more ${authState.theme}`}>
-                                Show more
+                                {t('showMore')}
                             </Button>
                         }
                     </Grid>

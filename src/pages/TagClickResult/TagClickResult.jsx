@@ -115,7 +115,7 @@ export const TagClickResult = () => {
                     {!(listOfCurrOverviews.length >= listOfAllOverviews.length) &&
                         <Button onClick={showMoreBtn} id="submit-btn"
                                 className={`submit-btn-show-more ${authState.theme}`}>
-                            Show more
+                            {t('showMore')}
                         </Button>
                     }
                 </Grid>
